@@ -1,0 +1,229 @@
+/* ==========================================================================
+   FIXED & OPTIMIZED APP.CSS
+   ========================================================================== */
+
+   :root {
+    --accent: #22d3ee;
+    --accent-bg: rgba(34,211,238,0.05);
+    --accent-border: rgba(34,211,238,0.2);
+    --border: rgba(63,63,70,0.3);
+    --text-h: #f4f4f5;
+    --social-bg: rgba(24,24,27,0.6);
+    --shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
+  }
+  
+  .counter {
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    margin-bottom: 24px;
+    cursor: pointer;
+  
+    &:hover {
+      border-color: var(--accent-border);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  }
+  
+  /* --- HERO LAYER TRANSFORMS (Fixed Overflow & Scale) --- */
+  .hero {
+    position: relative;
+    width: 100%;
+    max-width: 320px; /* Mobile bounds safely lock */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px; /* Prevents layers collapsing into next divs */
+  
+    .base,
+    .framework,
+    .vite {
+      inset-inline: 0;
+      margin: 0 auto;
+    }
+  
+    .base {
+      width: 160px;
+      position: relative;
+      z-index: 0;
+    }
+  
+    /* Fixed 3D projection boundaries so they don't break viewport bounds */
+    .framework {
+      z-index: 2;
+      top: 20px;
+      height: 28px;
+      position: absolute;
+      transform: perspective(1000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg) scale(1.2);
+      transform-origin: center;
+    }
+  
+    .vite {
+      z-index: 1;
+      top: 90px;
+      height: 26px;
+      width: auto;
+      position: absolute;
+      transform: perspective(1000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg) scale(0.8);
+      transform-origin: center;
+    }
+  }
+  
+  /* --- CENTER CONTENT CONTAINER --- */
+  #center {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  
+    @media (max-width: 1024px) {
+      padding: 40px 24px 32px;
+      gap: 20px;
+    }
+  }
+  
+  /* --- NEXT STEPS GRID PATTERN --- */
+  #next-steps {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    text-align: left;
+    box-sizing: border-box;
+  
+    & > div {
+      flex: 1;
+      min-width: 280px; /* Prevents columns shrinking to 0px width */
+      padding: 40px;
+      box-sizing: border-box;
+      
+      @media (max-width: 1024px) {
+        padding: 32px 24px;
+      }
+    }
+  
+    .icon {
+      margin-bottom: 16px;
+      width: 22px;
+      height: 22px;
+    }
+  
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
+  #docs {
+    border-right: 1px solid var(--border);
+  
+    @media (max-width: 1024px) {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+  
+  /* --- NAVIGATION LINKS MATRIX --- */
+  #next-steps ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Fallback safe wrapping */
+    gap: 12px;
+    margin: 24px 0 0;
+  
+    .logo {
+      height: 18px;
+    }
+  
+    a {
+      color: var(--text-h);
+      font-size: 15px;
+      border-radius: 6px;
+      background: var(--social-bg);
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      padding: 8px 14px;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+  
+      &:hover {
+        box-shadow: var(--shadow);
+        background: rgba(255,255,255,0.05);
+      }
+      .button-icon {
+        height: 18px;
+        width: 18px;
+      }
+    }
+  
+    @media (max-width: 1024px) {
+      margin-top: 24px;
+      justify-content: center;
+  
+      li {
+        flex: 1 1 calc(50% - 12px);
+        min-width: 140px;
+      }
+  
+      a {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      li {
+        flex: 1 1 100%; /* Single stack on tiny screens */
+      }
+    }
+  }
+  
+  /* --- BOTTOM LAYOUT BALANCER --- */
+  #spacer {
+    height: 88px;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    @media (max-width: 1024px) {
+      height: 48px;
+    }
+  }
+  
+  /* --- WIREFRAME TICKS CORNER CAPS --- */
+  .ticks {
+    position: relative;
+    width: 100%;
+  
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      border: 5px solid transparent;
+    }
+  
+    &::before {
+      left: 0;
+      border-left-color: var(--border);
+    }
+    &::after {
+      right: 0;
+      border-right-color: var(--border);
+    }
+  }
